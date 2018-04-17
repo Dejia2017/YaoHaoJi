@@ -5,12 +5,12 @@ import java.awt.event.ActionListener;
 
 public class Main extends JFrame {
     static boolean start = false;
-    boolean pause = false;
+    boolean pause = false; //控制线程执行的内容 产生随机数或者什么都不做
     JLabel label1 = new JLabel();
     JLabel label2 = new JLabel();
     JButton btn1 = new JButton("开始");
     JButton btn2 = new JButton("结束");
-    Print p1 = new Print(label1);
+    Print p1 = new Print(label1);//把label和一个线程封装起来
     Print p2 = new Print(label2);
 
     //构造函数负责构造界面架构和界面功能（摇号按钮等）
@@ -32,13 +32,13 @@ public class Main extends JFrame {
         btn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                start();
+                start();//启动线程
             }
         });
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                start = pause;
+                start = pause;//相当于使线程不做任何事情
             }
         });
         setVisible(true);
@@ -51,12 +51,10 @@ public class Main extends JFrame {
         Thread thread2 = new Thread(p2);
         thread1.start();
         thread2.start();
-
     }
 
     public static void main(String[] args) {
-        Main m = new Main();
-        //m.init();
+        new Main();
     }
 
 }
